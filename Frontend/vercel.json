@@ -1,5 +1,6 @@
 {
   "version": 2,
+  "buildCommand": "chmod +x node_modules/.bin/vite && npm run build",
   "env": {
     "VITE_API_BASE_URL": "https://student-task-manager-slvz.onrender.com"
   }
