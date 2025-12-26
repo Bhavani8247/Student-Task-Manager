@@ -1,29 +1,73 @@
 import { useState } from "react";
-import { login, signup } from "../services/auth";
+import "../index.css";
 
-export default function AuthForm({ setAuth }) {
+function AuthForm({ setAuth }) {
   const [isLogin, setIsLogin] = useState(true);
-  const [form, setForm] = useState({ name: "", email: "", password: "" });
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [error, setError] = useState("");
 
-  const submit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = isLogin ? await login(form) : await signup(form);
-    localStorage.setItem("token", res.data.token);
+
+    if (!email || !password || (!isLogin && !name)) {
+      setError("All fields are required");
+      return;
+    }
+
+    // TEMP login simulation (replace with API later)
+    localStorage.setItem("token", "demo-token");
     setAuth(true);
   };
 
   return (
-    <form onSubmit={submit}>
+    <div className="auth-card-dark">
+      <h2>{isLogin ? "Sign in" : "Create an account"}</h2>
+
       {!isLogin && (
-        <input placeholder="Name" onChange={e => setForm({ ...form, name: e.target.value })} />
+        <input
+          type="text"
+          placeholder="Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
       )}
-      <input placeholder="Email" onChange={e => setForm({ ...form, email: e.target.value })} />
-      <input placeholder="Password" type="password"
-        onChange={e => setForm({ ...form, password: e.target.value })} />
-      <button>{isLogin ? "Login" : "Signup"}</button>
-      <p onClick={() => setIsLogin(!isLogin)}>
-        Switch to {isLogin ? "Signup" : "Login"}
+
+      <input
+        type="email"
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
+
+      <input
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+
+      {error && <p className="auth-error">{error}</p>}
+
+      <button className="btn-auth" onClick={handleSubmit}>
+        {isLogin ? "Sign in" : "Create account"}
+      </button>
+
+      <p className="switch-text">
+        {isLogin ? "Don't have an account?" : "Already have an account?"}
+        <button
+          className="link-button"
+          onClick={() => {
+            setIsLogin(!isLogin);
+            setError("");
+          }}
+        >
+          {isLogin ? " Sign up" : " Sign in"}
+        </button>
       </p>
-    </form>
+    </div>
   );
 }
+
+export default AuthForm;

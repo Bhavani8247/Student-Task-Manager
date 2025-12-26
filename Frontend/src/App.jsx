@@ -12,7 +12,11 @@ function App() {
       <TaskList />
     </>
   ) : (
-    <AuthForm setAuth={setAuth} />
+    <div className="auth-overlay">
+      <div className="auth-modal">
+        <AuthForm setAuth={setAuth} />
+      </div>
+    </div>
   );
 }
 
