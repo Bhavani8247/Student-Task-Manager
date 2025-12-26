@@ -1,21 +1,24 @@
-import TaskCard from './TaskCard';
+import { useEffect, useState } from "react";
+import { getTasks, deleteTask } from "../services/taskService";
 
-const TaskList = ({ tasks, onUpdate, onDelete }) => {
-  if (!tasks.length) {
-    return <div className="empty">No tasks yet. Add your first task above.</div>;
-  }
+export default function TaskList() {
+  const [tasks, setTasks] = useState([]);
+
+  const load = async () => {
+    const res = await getTasks();
+    setTasks(res.data);
+  };
+
+  useEffect(() => { load(); }, []);
+
   return (
-    <div className="task-list">
-      {tasks.map((t) => (
-        <TaskCard
-          key={t._id}
-          task={t}
-          onUpdate={onUpdate}
-          onDelete={onDelete}
-        />
+    <ul>
+      {tasks.map(t => (
+        <li key={t._id}>
+          {t.title}
+          <button onClick={() => deleteTask(t._id).then(load)}>X</button>
+        </li>
       ))}
-    </div>
+    </ul>
   );
-};
-
-export default TaskList;
+}
