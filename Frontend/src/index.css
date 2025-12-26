@@ -1,20 +1,25 @@
+/* =============== GLOBAL =============== */
+
 * {
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
   background: linear-gradient(135deg, #eef2ff, #f9fafb);
   color: #111827;
 }
 
+/* Root layout for main app (after login) */
 .app-root {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
+/* =============== HEADER =============== */
 
 .header {
   max-width: 1100px;
@@ -52,6 +57,7 @@ body {
   color: #4b5563;
 }
 
+/* =============== MAIN GRID =============== */
 
 .app-main {
   max-width: 1100px;
@@ -68,6 +74,7 @@ body {
   }
 }
 
+/* =============== CARDS & FORMS =============== */
 
 .card,
 .task-card,
@@ -77,7 +84,6 @@ body {
   box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
   padding: 1.25rem 1.5rem;
 }
-
 
 .card h2 {
   margin-top: 0;
@@ -98,10 +104,10 @@ body {
   flex: 1 1 150px;
 }
 
-input[type='text'],
-input[type='email'],
-input[type='password'],
-input[type='date'],
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
 select,
 textarea {
   width: 100%;
@@ -116,6 +122,7 @@ textarea {
   resize: vertical;
 }
 
+/* =============== BUTTONS =============== */
 
 button {
   cursor: pointer;
@@ -159,6 +166,7 @@ button {
   color: #b91c1c;
 }
 
+/* =============== FILTER / SEARCH =============== */
 
 .filter-bar {
   display: flex;
@@ -179,7 +187,6 @@ button {
   margin-bottom: 0.15rem;
 }
 
-
 .search-row {
   margin-bottom: 0.9rem;
 }
@@ -188,6 +195,7 @@ button {
   width: 100%;
 }
 
+/* =============== TASK LIST =============== */
 
 .task-list {
   display: flex;
@@ -238,7 +246,6 @@ button {
   gap: 0.35rem;
 }
 
-
 .badge {
   border-radius: 999px;
   padding: 0.2rem 0.6rem;
@@ -276,13 +283,13 @@ button {
   color: #b91c1c;
 }
 
-
 .empty {
   text-align: center;
   color: #6b7280;
   padding: 2rem 1rem;
 }
 
+/* =============== MODAL (TASK EDIT) =============== */
 
 .modal-backdrop {
   position: fixed;
@@ -330,6 +337,7 @@ button {
   margin-top: 0.25rem;
 }
 
+/* =============== SIMPLE AUTH SCREEN (unused if using dark popup) =============== */
 
 .auth-screen {
   min-height: 100vh;
@@ -375,6 +383,7 @@ button {
   font-size: 0.85rem;
 }
 
+/* =============== RESPONSIVE =============== */
 
 .center-text {
   text-align: center;
@@ -397,76 +406,153 @@ button {
   }
 }
 
-/* ===== AUTH OVERLAY (LOGIN / SIGNUP) ===== */
+/* =========================================
+   DARK OVERLAY AUTH (Signup / Signin popup)
+   ========================================= */
 
 .auth-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.75);
+  background: radial-gradient(circle at bottom left, #001220, #000000 55%);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 100;
 }
 
+/* Card like the screenshot */
 .auth-modal {
-  width: 380px;
-  background: linear-gradient(180deg, #1e1e1e, #121212);
-  padding: 24px;
-  border-radius: 18px;
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
-  color: white;
+  width: 420px;
+  background: radial-gradient(circle at top left, #252525, #111111 65%);
+  padding: 26px;
+  border-radius: 24px;
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.9);
+  color: #f9fafb;
+  border: 1px solid rgba(148, 163, 184, 0.15);
 }
 
-/* Auth form inside modal */
+/* Inner dark card */
 .auth-card-dark h2 {
-  text-align: center;
-  margin-bottom: 16px;
+  text-align: left;
+  margin-bottom: 18px;
+  font-size: 1.25rem;
 }
 
+/* Inputs */
 .auth-card-dark input {
   width: 100%;
   padding: 12px;
   margin-bottom: 12px;
-  background: #1f1f1f;
-  border: 1px solid #333;
-  border-radius: 10px;
-  color: white;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(75, 85, 99, 0.8);
+  border-radius: 12px;
+  color: #e5e7eb;
+  font-size: 0.9rem;
 }
 
 .auth-card-dark input::placeholder {
   color: #9ca3af;
 }
 
+/* Tabs at top */
+.auth-tabs {
+  display: inline-flex;
+  background: #111827;
+  border-radius: 999px;
+  padding: 4px;
+  margin-bottom: 20px;
+}
+
+.auth-tabs button {
+  flex: 1;
+  padding: 8px 18px;
+  border: none;
+  background: transparent;
+  color: #9ca3af;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.auth-tabs button.active {
+  background: #0f172a;
+  color: #ffffff;
+}
+
+/* Row for first + last name */
+.name-row {
+  display: flex;
+  gap: 10px;
+}
+
+/* Primary white button */
 .btn-auth {
   width: 100%;
   padding: 12px;
-  background: white;
-  color: black;
-  border-radius: 10px;
+  background: linear-gradient(180deg, #ffffff, #d1d5db);
+  color: #000000;
+  border-radius: 12px;
   border: none;
-  font-weight: bold;
+  font-weight: 600;
   cursor: pointer;
 }
 
-.auth-error {
-  color: #fca5a5;
-  font-size: 0.85rem;
+/* Divider */
+.divider {
   text-align: center;
-  margin-bottom: 8px;
-}
-
-.switch-text {
-  margin-top: 12px;
-  text-align: center;
-  font-size: 0.85rem;
+  margin: 18px 0 14px;
+  font-size: 0.7rem;
   color: #9ca3af;
+  position: relative;
 }
 
-.link-button {
-  background: none;
-  border: none;
-  color: #60a5fa;
+.divider::before,
+.divider::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 32%;
+  height: 1px;
+  background: #374151;
+}
+
+.divider::before {
+  left: 0;
+}
+
+.divider::after {
+  right: 0;
+}
+
+/* Social buttons */
+.social-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.social-btn {
+  flex: 1;
+  padding: 10px;
+  border-radius: 12px;
+  background: #111827;
+  border: 1px solid #374151;
+  color: #e5e7eb;
   cursor: pointer;
   font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.social-btn:hover {
+  background: #18181b;
+}
+
+/* Terms text */
+.terms {
+  margin-top: 14px;
+  font-size: 0.7rem;
+  text-align: center;
+  color: #9ca3af;
 }
