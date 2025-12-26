@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { getTasks, deleteTask } from "../services/taskService";
+import { getTasks, updateTask, deleteTask } from "../services/api";
+
 
 export default function TaskList() {
   const [tasks, setTasks] = useState([]);
